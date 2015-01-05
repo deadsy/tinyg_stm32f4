@@ -1,0 +1,24 @@
+--- TinyG-master/firmware/tinyg/canonical_machine.c	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/canonical_machine.c	2015-01-04 22:16:19.146040848 -0800
+@@ -72,11 +72,11 @@
+  *		this category.
+  *
+  */
++#include <inttypes.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <math.h>
+ #include <string.h>				// needed for memcpy, memset
+-#include <avr/pgmspace.h>		// needed for exception strings
+ 
+ #include "tinyg.h"
+ #include "util.h"
+@@ -89,7 +89,7 @@
+ #include "report.h"
+ #include "gpio.h"
+ #include "system.h"
+-#include "xio/xio.h"			// for serial queue flush
++#include "stm32f4/stm32f4.h"			// for serial queue flush
+ 
+ // NOTE: The canonical machine singleton "cm" would normally be declared here 
+ // but it's also used by cycles so it's in canonical_machine.h instead.

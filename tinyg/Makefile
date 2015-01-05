@@ -13,8 +13,8 @@ PATCH_CMD = \
 
 all:
 	tar jxf $(TARFILE)
-#	$(PATCH_CMD)
-#	cd files; tar -c -f - * | (cd ../$(WORK_DIR) ; tar xfp -)
+	$(PATCH_CMD)
+	cd files; tar -c -f - * | (cd ../$(WORK_DIR) ; tar xfp -)
 
 clean:
 	-rm -rf $(WORK_DIR)

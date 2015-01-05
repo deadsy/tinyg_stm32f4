@@ -1,0 +1,31 @@
+--- TinyG-master/firmware/tinyg/main.c	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/main.c	2015-01-04 21:25:06.421059210 -0800
+@@ -19,14 +19,9 @@
+ /* See github.coom/Synthetos/tinyg for code and docs on the wiki 
+  */
+ 
+-#include <stdio.h>				// precursor for xio.h
+-#include <avr/pgmspace.h>		// precursor for xio.h
+-#include <avr/interrupt.h>
+-
+-#include "xmega/xmega_interrupts.h"
+-//#include "xmega/xmega_eeprom.h"	// uncomment for unit tests
+-#include "xmega/xmega_rtc.h"
+-#include "xio/xio.h"
++#include <inttypes.h>
++
++#include "stm32f4/stm32f4.h"
+ 
+ #include "tinyg.h"				// #1 There are some dependencies
+ #include "system.h"
+@@ -78,10 +73,6 @@
+ 	sp_init();						// spindle PWM and variables
+ 
+ 	// now bring up the interupts and get started
+-	PMIC_SetVectorLocationToApplication();// as opposed to boot ROM
+-	PMIC_EnableHighLevel();			// all levels are used, so don't bother to abstract them
+-	PMIC_EnableMediumLevel();
+-	PMIC_EnableLowLevel();
+ 	sei();							// enable global interrupts
+ 	rpt_print_system_ready_message();// (LAST) announce system is ready
+ 
