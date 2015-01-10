@@ -38,16 +38,16 @@ SRC = $(TINYG_DIR)/canonical_machine.c \
 #      $(TINYG_DIR)/system.c \
 
 # hal sources
-#HAL_DIR = ./hal/src
-#SRC += $(HAL_DIR)/stm32f4xx_hal.c \
-#       $(HAL_DIR)/stm32f4xx_hal_rcc.c \
-#       $(HAL_DIR)/stm32f4xx_hal_cortex.c \
-#       $(HAL_DIR)/stm32f4xx_hal_gpio.c \
-#       $(HAL_DIR)/stm32f4xx_hal_pcd.c \
-#       $(HAL_DIR)/stm32f4xx_hal_dma.c \
-#       $(HAL_DIR)/stm32f4xx_ll_usb.c \
-#       $(HAL_DIR)/stm32f4xx_hal_tim.c \
-#       $(HAL_DIR)/stm32f4xx_hal_tim_ex.c \
+HAL_DIR = ./hal/src
+SRC += $(HAL_DIR)/stm32f4xx_hal.c \
+       $(HAL_DIR)/stm32f4xx_hal_rcc.c \
+       $(HAL_DIR)/stm32f4xx_hal_cortex.c \
+       $(HAL_DIR)/stm32f4xx_hal_gpio.c \
+       $(HAL_DIR)/stm32f4xx_hal_pcd.c \
+       $(HAL_DIR)/stm32f4xx_hal_dma.c \
+       $(HAL_DIR)/stm32f4xx_ll_usb.c \
+       $(HAL_DIR)/stm32f4xx_hal_tim.c \
+       $(HAL_DIR)/stm32f4xx_hal_tim_ex.c \
 
 # usb sources
 #USB_DIR = ./usb
@@ -59,6 +59,7 @@ SRC = $(TINYG_DIR)/canonical_machine.c \
 STM32F4_DIR = ./stm32f4
 SRC += $(STM32F4_DIR)/system_stm32f4xx.c \
        $(STM32F4_DIR)/syscalls.c \
+       $(STM32F4_DIR)/delay.c \
 
 # board sources
 #BOARD_DIR = ./board
