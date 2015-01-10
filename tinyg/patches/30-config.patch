@@ -20,7 +20,7 @@
  #include "network.h"
 -#include "xio/xio.h"
 -#include "xmega/xmega_eeprom.h"
-+#include "stm32f4/stm32f4.h"
++#include "stm32f4.h"
  
  typedef char PROGMEM *prog_char_ptr;	// access to PROGMEM arrays of PROGMEM strings
  

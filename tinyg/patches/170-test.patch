@@ -14,7 +14,7 @@
  #include "planner.h"
  #include "test.h"
 -#include "xio/xio.h"
-+#include "stm32f4/stm32f4.h"
++#include "stm32f4.h"
  
  // regression test files
  #include "tests/test_001_smoke.h" 			// basic functionality

@@ -15,7 +15,7 @@
  #include "report.h"
  #include "controller.h"
  #include "help.h"
-+#include "stm32f4/stm32f4.h"
++#include "stm32f4.h"
  
  static void _status_report_advisory(void);
  static void _postscript(void);

@@ -18,7 +18,7 @@
  #include "plan_arc.h"
  #include "planner.h"
  #include "kinematics.h"
-+#include "stm32f4/stm32f4.h"
++#include "stm32f4.h"
  
  /*
   * Local functions

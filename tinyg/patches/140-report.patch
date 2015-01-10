@@ -19,7 +19,7 @@
  #include "settings.h"
 -#include "xio/xio.h"
 -#include "xmega/xmega_rtc.h"
-+#include "stm32f4/stm32f4.h"
++#include "stm32f4.h"
  
  /**** Status and Exception Messages **************************************************
   * rpt_get_status_message() - return the status message

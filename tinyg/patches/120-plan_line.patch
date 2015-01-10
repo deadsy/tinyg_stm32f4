@@ -15,7 +15,7 @@
  #include "report.h"
  #include "util.h"
 -//#include "xio/xio.h"			// uncomment for debugging
-+#include "stm32f4/stm32f4.h"
++#include "stm32f4.h"
  
  // aline planner routines / feedhold planning
  static void _plan_block_list(mpBuf_t *bf, uint8_t *mr_flag);

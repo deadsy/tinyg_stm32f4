@@ -17,7 +17,7 @@
  #include "stepper.h"
  #include "report.h"
  #include "gpio.h"
-+#include "stm32f4/stm32f4.h"
++#include "stm32f4.h"
  
  /**** Homing singleton structure ****/
  

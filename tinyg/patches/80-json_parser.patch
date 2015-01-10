@@ -19,7 +19,7 @@
  #include "report.h"
  #include "util.h"
 -#include "xio/xio.h"				// for char definitions
-+#include "stm32f4/stm32f4.h"				// for char definitions
++#include "stm32f4.h"				// for char definitions
  
  // local scope stuff
  

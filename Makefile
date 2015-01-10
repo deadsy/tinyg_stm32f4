@@ -37,10 +37,6 @@ SRC = $(TINYG_DIR)/canonical_machine.c \
 #      $(TINYG_DIR)/pwm.c \
 #      $(TINYG_DIR)/gpio.c \
 
-STM32F4_DIR = $(TINYG_DIR)/stm32f4
-#SRC += $(STM32F4_DIR)/rtc.c
-
-
 # hal sources
 #HAL_DIR = ./hal/src
 #SRC += $(HAL_DIR)/stm32f4xx_hal.c \
@@ -60,15 +56,17 @@ STM32F4_DIR = $(TINYG_DIR)/stm32f4
 #       $(USB_DIR)/core/usbd_ioreq.c \
 #       $(USB_DIR)/cdc/usbd_cdc.c \
 
+STM32F4_DIR = ./stm32f4
+SRC += $(STM32F4_DIR)/system_stm32f4xx.c \
+       $(STM32F4_DIR)/syscalls.c \
+
 # board sources
 #BOARD_DIR = ./board
 #SRC += $(BOARD_DIR)/main.c \
-#       $(BOARD_DIR)/system_stm32f4xx.c \
 #       $(BOARD_DIR)/stm32f4xx_it.c \
 #       $(BOARD_DIR)/usbd_conf.c \
 #       $(BOARD_DIR)/usbd_desc.c \
 #       $(BOARD_DIR)/usbd_cdc_interface.c \
-#       $(BOARD_DIR)/syscalls.c \
 #       $(BOARD_DIR)/gpio.c \
 #       $(BOARD_DIR)/debounce.c \
 #       $(BOARD_DIR)/timers.c \
@@ -79,12 +77,12 @@ OBJ += $(STM32F4_DIR)/start.o
 
 # include files
 INC = .
-#INC += ./cmsis
-#INC += ./hal/inc
+INC += ./cmsis
+INC += ./hal/inc
+INC += $(STM32F4_DIR)
+
 #INC += $(USB_DIR)/core
 #INC += $(USB_DIR)/cdc
-#INC += $(BOARD_DIR)
-#INC += $(GRBL_DIR)
 
 INCLUDE = $(addprefix -I,$(INC))
 
@@ -93,7 +91,7 @@ CFLAGS = -Wall
 CFLAGS += -O
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
-CFLAGS += -std=c99
+CFLAGS += -std=gnu99
 
 # linker flags
 LDSCRIPT = stm32f407vg_flash.ld
@@ -107,8 +105,8 @@ DEFINES = -DSTM32F407xx
 	$(X_CC) $(INCLUDE) $(DEFINES) $(CFLAGS) -c $< -o $@
 
 all: tinyg_src $(OBJ)
-#	$(X_CC) $(CFLAGS) $(LDFLAGS) $(OBJ) -lm -o $(OUTPUT)
-#	$(X_OBJCOPY) -O binary $(OUTPUT) $(OUTPUT).bin
+	$(X_CC) $(CFLAGS) $(LDFLAGS) $(OBJ) -lm -o $(OUTPUT)
+	$(X_OBJCOPY) -O binary $(OUTPUT) $(OUTPUT).bin
 
 .PHONY: program
 program: 

@@ -18,7 +18,7 @@
  #include "gpio.h"
  #include "system.h"
 -#include "xio/xio.h"			// for serial queue flush
-+#include "stm32f4/stm32f4.h"			// for serial queue flush
++#include "stm32f4.h"			// for serial queue flush
  
  // NOTE: The canonical machine singleton "cm" would normally be declared here 
  // but it's also used by cycles so it's in canonical_machine.h instead.

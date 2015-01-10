@@ -21,7 +21,7 @@
  #include "gpio.h"
  #include "test.h"
  #include "pwm.h"
-+#include "stm32f4/stm32f4.h"
++#include "stm32f4.h"
  
  static void _unit_tests(void);
  stat_t status_code;				// declared in main.c
