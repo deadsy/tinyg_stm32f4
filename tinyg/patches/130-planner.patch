@@ -1,0 +1,23 @@
+--- TinyG-master/firmware/tinyg/planner.c.original	2015-01-10 07:32:34.779605111 -0800
++++ TinyG-master/firmware/tinyg/planner.c	2015-01-10 07:33:18.667862749 -0800
+@@ -52,11 +52,11 @@
+  *	may have changed and lead to unpredictable results.
+  */
+ 
++#include <inttypes.h>
+ #include <stdlib.h>
+ #include <math.h>
+ #include <string.h>				// for memset
+ #include <stdio.h>				// precursor for xio.h
+-#include <avr/pgmspace.h>		// precursor for xio.h
+ 
+ #include "tinyg.h"
+ #include "config.h"
+@@ -68,7 +68,6 @@
+ #include "stepper.h"
+ #include "report.h"
+ #include "util.h"
+-//#include "xio/xio.h"			// uncomment for debugging
+ 
+ /*
+  * Local Scope Data and Functions

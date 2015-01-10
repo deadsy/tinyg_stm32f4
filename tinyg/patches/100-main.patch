@@ -1,6 +1,6 @@
---- TinyG-master/firmware/tinyg/main.c	2014-07-12 14:29:33.000000000 -0700
-+++ TinyG-master/firmware/tinyg/main.c	2015-01-04 21:25:06.421059210 -0800
-@@ -19,14 +19,9 @@
+--- TinyG-master/firmware/tinyg/main.c.original	2015-01-10 07:21:58.632181633 -0800
++++ TinyG-master/firmware/tinyg/main.c	2015-01-10 07:21:35.139874907 -0800
+@@ -19,14 +19,8 @@
  /* See github.coom/Synthetos/tinyg for code and docs on the wiki 
   */
  
@@ -13,11 +13,18 @@
 -#include "xmega/xmega_rtc.h"
 -#include "xio/xio.h"
 +#include <inttypes.h>
-+
-+#include "stm32f4/stm32f4.h"
++#include <stdio.h>
  
  #include "tinyg.h"				// #1 There are some dependencies
  #include "system.h"
+@@ -44,6 +38,7 @@
+ #include "gpio.h"
+ #include "test.h"
+ #include "pwm.h"
++#include "stm32f4/stm32f4.h"
+ 
+ static void _unit_tests(void);
+ stat_t status_code;				// declared in main.c
 @@ -78,10 +73,6 @@
  	sp_init();						// spindle PWM and variables
  

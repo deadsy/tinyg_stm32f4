@@ -1,0 +1,10 @@
+--- TinyG-master/firmware/tinyg/kinematics.c.original	2015-01-10 07:15:43.951907425 -0800
++++ TinyG-master/firmware/tinyg/kinematics.c	2015-01-10 07:15:58.860046723 -0800
+@@ -25,6 +25,7 @@
+  * OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  */
+ 
++#include <inttypes.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>

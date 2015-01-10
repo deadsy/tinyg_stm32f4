@@ -8,7 +8,8 @@
 #define flags_t uint16_t
 
 //-----------------------------------------------------------------------------
-#define NUL 0
+
+#define _FDEV_ERR (-1)
 
 //-----------------------------------------------------------------------------
 typedef struct rtClock {
@@ -20,30 +21,62 @@ rtClock_t rtc;
 
 void rtc_init(void);
 
+#define RTC_MILLISECONDS 10 // interrupt on every 10 RTC ticks (~10 ms)
+
 //-----------------------------------------------------------------------------
 
 void cli(void);
 void sei(void);
 
 //-----------------------------------------------------------------------------
-void xio_init(void);
 
-uint8_t xio_assertions(uint8_t *value);
+void _delay_ms(double __ms);
+void _delay_us(double __us);
 
 //-----------------------------------------------------------------------------
 
+void xio_enable_rs485_rx(void);
 void xio_reset_usb_rx_buffers(void);
 buffer_t xio_get_usb_rx_free(void);
-#define XIO_DEV_USB 0
+
+enum {
+    XIO_DEV_USB,
+    XIO_DEV_RS485,
+    XIO_DEV_PGM,
+};
 
 //-----------------------------------------------------------------------------
 
+void xio_init(void);
+//void xio_reset_working_flags(xioDev_t *d);
+FILE *xio_open(const uint8_t dev, const char *addr, const flags_t flags);
 int xio_ctrl(const uint8_t dev, const flags_t flags);
+int xio_gets(const uint8_t dev, char *buf, const int size);
+int xio_getc(const uint8_t dev);
+int xio_putc(const uint8_t dev, const char c);
 int xio_set_baud(const uint8_t dev, const uint8_t baud_rate);
+
+// generic functions (private, but at virtual level)
+//int xio_ctrl_generic(xioDev_t *d, const flags_t flags);
+
+//void xio_open_generic(uint8_t dev, x_open_t x_open,
+//                                   x_ctrl_t x_ctrl,
+//                                   x_gets_t x_gets,
+//                                   x_getc_t x_getc,
+//                                   x_putc_t x_putc,
+//                                   x_flow_t x_flow);
+
+//void xio_fc_null(xioDev_t *d);          // NULL flow control callback
+//void xio_fc_usart(xioDev_t *d);         // XON/XOFF flow control callback
+
+// std devices
+//void xio_init_stdio(void);              // set std devs & do startup prompt
 void xio_set_stdin(const uint8_t dev);
 void xio_set_stdout(const uint8_t dev);
 void xio_set_stderr(const uint8_t dev);
-int xio_gets(const uint8_t dev, char *buf, const int size);
+
+// assertions
+uint8_t xio_assertions(uint8_t *value);
 
 //-----------------------------------------------------------------------------
 
@@ -66,13 +99,33 @@ int xio_gets(const uint8_t dev, char *buf, const int size);
 
 //-----------------------------------------------------------------------------
 
-double square(double square);
+#define NUL (char)0x00  //  ASCII NUL char (0) (not "NULL" which is a pointer)
+#define STX (char)0x02  // ^b - STX
+#define ETX (char)0x03  // ^c - ETX
+#define ENQ (char)0x05  // ^e - ENQuire
+#define BEL (char)0x07  // ^g - BEL
+#define BS  (char)0x08  // ^h - backspace
+#define TAB (char)0x09  // ^i - character
+#define LF  (char)0x0A  // ^j - line feed
+#define VT  (char)0x0B  // ^k - kill stop
+#define CR  (char)0x0D  // ^m - carriage return
+#define XON (char)0x11  // ^q - DC1, XON, resume
+#define XOFF (char)0x13 // ^s - DC3, XOFF, pause
+#define SYN (char)0x16  // ^v - SYN - Used for queue flush
+#define CAN (char)0x18  // ^x - Cancel, abort
+#define ESC (char)0x1B  // ^[ - ESC(ape)
+#define SP  (char)0x20  // ' ' Space character
+#define DEL (char)0x7F  // DEL(ete)
 
 //-----------------------------------------------------------------------------
 
 #define PROGMEM
 #define PSTR(x) (x)
 #define PGM_P const char *
+#define PGMFILE (const char *)
+#define PGM_FLAGS (XIO_BLOCK | XIO_CRLF | XIO_LINEMODE)
+
+#define printf_P printf
 #define fprintf_P fprintf
 #define sprintf_P sprintf
 #define strcpy_P strcpy

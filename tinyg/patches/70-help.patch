@@ -1,0 +1,21 @@
+--- TinyG-master/firmware/tinyg/help.c.original	2015-01-10 07:05:01.992674366 -0800
++++ TinyG-master/firmware/tinyg/help.c	2015-01-10 07:06:05.293616701 -0800
+@@ -17,9 +17,8 @@
+  * OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  */
+ 
+-//#include <ctype.h>
++#include <inttypes.h>
+ #include <stdio.h>
+-#include <avr/pgmspace.h>
+ 
+ #include "tinyg.h"
+ #include "util.h"
+@@ -27,6 +26,7 @@
+ #include "report.h"
+ #include "controller.h"
+ #include "help.h"
++#include "stm32f4/stm32f4.h"
+ 
+ static void _status_report_advisory(void);
+ static void _postscript(void);

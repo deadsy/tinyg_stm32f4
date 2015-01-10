@@ -1,0 +1,22 @@
+--- TinyG-master/firmware/tinyg/network.c.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/network.c	2015-01-10 07:53:00.094196124 -0800
+@@ -31,17 +31,16 @@
+  *	using what's in this file, but you won;t find much more.
+  */
+ 
++#include <inttypes.h>					// precursor for xio.h
+ #include <stdio.h>					// precursor for xio.h
+ #include <stdbool.h>				// true and false
+-#include <avr/pgmspace.h>			// precursor for xio.h
+-#include <util/delay.h>				// for tests
+ 
+ #include "tinyg.h"
+ #include "network.h"
+ #include "controller.h"
+ #include "gpio.h"
+ #include "system.h"
+-#include "xio/xio.h"
++#include "stm32f4/stm32f4.h"
+ 
+ /*
+  * Local Scope Functions and Data

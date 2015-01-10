@@ -1,0 +1,21 @@
+--- TinyG-master/firmware/tinyg/test.c.original	2015-01-10 08:25:46.412234143 -0800
++++ TinyG-master/firmware/tinyg/test.c	2015-01-10 08:26:44.468789168 -0800
+@@ -20,15 +20,15 @@
+  *	 http://www.synthetos.com/wiki/index.php?title=Projects:TinyG-Developer-Info
+  */
+ 
++#include <inttypes.h>				// precursor for xio.h
+ #include <stdio.h>				// precursor for xio.h
+-#include <avr/pgmspace.h>		// precursor for xio.h
+ #include "tinyg.h"				// #1 unfortunately, there are some dependencies
+ #include "util.h"				// #2
+ #include "config.h"				// #3
+ #include "controller.h"
+ #include "planner.h"
+ #include "test.h"
+-#include "xio/xio.h"
++#include "stm32f4/stm32f4.h"
+ 
+ // regression test files
+ #include "tests/test_001_smoke.h" 			// basic functionality
+ static void _plan_block_list(mpBuf_t *bf, uint8_t *mr_flag);

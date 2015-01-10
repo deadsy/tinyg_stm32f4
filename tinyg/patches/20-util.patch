@@ -1,6 +1,14 @@
---- TinyG-master/firmware/tinyg/util.h	2015-01-09 19:37:09.541088467 -0800
-+++ TinyG-master/firmware/tinyg/util.h	2015-01-09 19:38:17.013081079 -0800
-@@ -109,7 +109,7 @@
+--- TinyG-master/firmware/tinyg/util.h.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/util.h	2015-01-10 08:18:45.980352090 -0800
+@@ -43,6 +43,7 @@
+ float min4(float x1, float x2, float x3, float x4);
+ float max3(float x1, float x2, float x3);
+ float max4(float x1, float x2, float x3, float x4);
++double square(double x);
+ uint8_t isnumber(char c);
+ uint8_t read_float(char *buf, uint8_t *i, float *float_ptr);
+ uint16_t compute_checksum(char const *string, const uint16_t length);
+@@ -109,7 +110,7 @@
  #define uSec(a) ((float)(a * MICROSECONDS_PER_MINUTE))
  
  #define RADIAN (57.2957795)
@@ -9,3 +17,41 @@
  //		M_SQRT2 is radical2 as defined in math.h
  #define M_SQRT3 (1.73205080756888)
  
+--- TinyG-master/firmware/tinyg/util.c.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/util.c	2015-01-10 08:21:55.890072739 -0800
+@@ -31,13 +31,13 @@
+  *	  - vector manipulation utilities
+  *	  - support for debugging routines
+  */  
++#include <inttypes.h>
+ #include <ctype.h>
+ #include <stdio.h>				// precursor for xio.h
+ #include <stdlib.h>
+ #include <stdbool.h>
+ #include <math.h>
+ #include <string.h>
+-#include <avr/pgmspace.h>		// precursor for xio.h
+ 
+ #include "tinyg.h"
+ #include "util.h"
+@@ -168,6 +168,11 @@
+ 	return (max);
+ }
+ 
++inline double square(double x)
++{
++    return x * x;
++}
++
+ /*
+  * isnumber() - isdigit that also accepts plus, minus, and decimal point
+  */
+@@ -177,7 +182,7 @@
+ 	if (c == '.') { return (true); }
+ 	if (c == '-') { return (true); }
+ 	if (c == '+') { return (true); }
+-	return (isdigit(c));
++	return (isdigit((int)c));
+ }
+ 
+ /* 

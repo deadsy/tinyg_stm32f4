@@ -1,0 +1,43 @@
+--- TinyG-master/firmware/tinyg/json_parser.c.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/json_parser.c	2015-01-10 07:14:11.339121818 -0800
+@@ -29,12 +29,12 @@
+  *	 http://www.synthetos.com/wiki/index.php?title=Projects:TinyG-JSON
+  */
+ 
++#include <inttypes.h>
+ #include <ctype.h>
+ #include <stdlib.h>
+ #include <math.h>
+ #include <string.h>					// needed for memcpy, memset
+ #include <stdio.h>					// precursor for xio.h
+-#include <avr/pgmspace.h>			// precursor for xio.h
+ 
+ #include "tinyg.h"
+ #include "config.h"					// JSON sits on top of the config system
+@@ -43,7 +43,7 @@
+ #include "canonical_machine.h"
+ #include "report.h"
+ #include "util.h"
+-#include "xio/xio.h"				// for char definitions
++#include "stm32f4/stm32f4.h"				// for char definitions
+ 
+ // local scope stuff
+ 
+@@ -157,7 +157,7 @@
+ 		if (!in_comment) {					// normal processing
+ 			if (*str == '(') in_comment = true;
+ 			if ((*str <= ' ') || (*str == DEL)) continue; // toss ctrls, WS & DEL
+-			*wr++ = tolower(*str);
++			*wr++ = tolower((int)*str);
+ 		} else {							// Gcode comment processing	
+ 			if (*str == ')') in_comment = false;
+ 			*wr++ = *str;
+@@ -212,7 +212,7 @@
+ 		cmd->value = TYPE_NULL;
+ 	
+ 	// numbers
+-	} else if (isdigit(**pstr) || (**pstr == '-')) {// value is a number
++	} else if (isdigit((int)**pstr) || (**pstr == '-')) {// value is a number
+ 		cmd->value = strtod(*pstr, &tmp);			// tmp is the end pointer
+ 		if(tmp == *pstr) { return (STAT_BAD_NUMBER_FORMAT);}
+ 		cmd->objtype = TYPE_FLOAT;

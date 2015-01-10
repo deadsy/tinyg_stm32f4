@@ -12,6 +12,9 @@ void sys_get_id(char *id);
 #define MIST_COOLANT_BIT    0x01        // coolant on/off - these are the same due to limited ports
 #define FLOOD_COOLANT_BIT   0x01        // coolant on/off
 
+#define SPINDLE_BIT         0x08        // spindle on/off
+#define SPINDLE_DIR         0x04        // spindle direction, 1=CW, 0=CCW
+
 #define INDICATOR_LED       0
 
 #endif

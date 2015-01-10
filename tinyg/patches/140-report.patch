@@ -1,0 +1,25 @@
+--- TinyG-master/firmware/tinyg/report.c.original	2015-01-10 07:35:15.236688122 -0800
++++ TinyG-master/firmware/tinyg/report.c	2015-01-10 07:36:20.437226831 -0800
+@@ -25,11 +25,11 @@
+  * OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  */
+ 
++#include <inttypes.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <math.h>
+-#include <avr/pgmspace.h>
+ 
+ #include "tinyg.h"
+ #include "util.h"
+@@ -41,8 +41,7 @@
+ #include "canonical_machine.h"
+ #include "report.h"
+ #include "settings.h"
+-#include "xio/xio.h"
+-#include "xmega/xmega_rtc.h"
++#include "stm32f4/stm32f4.h"
+ 
+ /**** Status and Exception Messages **************************************************
+  * rpt_get_status_message() - return the status message

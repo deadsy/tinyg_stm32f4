@@ -18,22 +18,24 @@ SRC = $(TINYG_DIR)/canonical_machine.c \
       $(TINYG_DIR)/controller.c \
       $(TINYG_DIR)/cycle_homing.c \
       $(TINYG_DIR)/gcode_parser.c \
-#      $(TINYG_DIR)/gpio.c \
-#      $(TINYG_DIR)/help.c \
-#      $(TINYG_DIR)/json_parser.c \
-#      $(TINYG_DIR)/kinematics.c \
-#      $(TINYG_DIR)/main.c \
-#      $(TINYG_DIR)/network.c \
-#      $(TINYG_DIR)/plan_arc.c \
-#      $(TINYG_DIR)/plan_line.c \
-#      $(TINYG_DIR)/planner.c \
-#      $(TINYG_DIR)/pwm.c \
-#      $(TINYG_DIR)/report.c \
-#      $(TINYG_DIR)/spindle.c \
+      $(TINYG_DIR)/help.c \
+      $(TINYG_DIR)/json_parser.c \
+      $(TINYG_DIR)/kinematics.c \
+      $(TINYG_DIR)/main.c \
+      $(TINYG_DIR)/plan_arc.c \
+      $(TINYG_DIR)/plan_line.c \
+      $(TINYG_DIR)/planner.c \
+      $(TINYG_DIR)/report.c \
+      $(TINYG_DIR)/spindle.c \
+      $(TINYG_DIR)/network.c \
+      $(TINYG_DIR)/util.c \
+      $(TINYG_DIR)/test.c \
+
+# not ported
 #      $(TINYG_DIR)/stepper.c \
 #      $(TINYG_DIR)/system.c \
-#      $(TINYG_DIR)/test.c \
-#      $(TINYG_DIR)/util.c \
+#      $(TINYG_DIR)/pwm.c \
+#      $(TINYG_DIR)/gpio.c \
 
 STM32F4_DIR = $(TINYG_DIR)/stm32f4
 #SRC += $(STM32F4_DIR)/rtc.c
@@ -105,8 +107,8 @@ DEFINES = -DSTM32F407xx
 	$(X_CC) $(INCLUDE) $(DEFINES) $(CFLAGS) -c $< -o $@
 
 all: tinyg_src $(OBJ)
-	$(X_CC) $(CFLAGS) $(LDFLAGS) $(OBJ) -lm -o $(OUTPUT)
-	$(X_OBJCOPY) -O binary $(OUTPUT) $(OUTPUT).bin
+#	$(X_CC) $(CFLAGS) $(LDFLAGS) $(OBJ) -lm -o $(OUTPUT)
+#	$(X_OBJCOPY) -O binary $(OUTPUT) $(OUTPUT).bin
 
 .PHONY: program
 program: 

@@ -1,0 +1,21 @@
+--- TinyG-master/firmware/tinyg/plan_line.c.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/plan_line.c	2015-01-10 07:31:36.055313365 -0800
+@@ -26,8 +26,8 @@
+  * OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  */
+ 
++#include <inttypes.h>
+ #include <math.h>
+-#include <avr/pgmspace.h>		// precursor for xio.h
+ 
+ #include "tinyg.h"
+ #include "config.h"
+@@ -39,7 +39,7 @@
+ #include "stepper.h"
+ #include "report.h"
+ #include "util.h"
+-//#include "xio/xio.h"			// uncomment for debugging
++#include "stm32f4/stm32f4.h"
+ 
+ // aline planner routines / feedhold planning
+ static void _plan_block_list(mpBuf_t *bf, uint8_t *mr_flag);
