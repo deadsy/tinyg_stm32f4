@@ -30,12 +30,12 @@ SRC = $(TINYG_DIR)/canonical_machine.c \
       $(TINYG_DIR)/network.c \
       $(TINYG_DIR)/util.c \
       $(TINYG_DIR)/test.c \
+      $(TINYG_DIR)/gpio.c \
 
 # not ported
 #      $(TINYG_DIR)/stepper.c \
 #      $(TINYG_DIR)/system.c \
 #      $(TINYG_DIR)/pwm.c \
-#      $(TINYG_DIR)/gpio.c \
 
 # hal sources
 #HAL_DIR = ./hal/src
