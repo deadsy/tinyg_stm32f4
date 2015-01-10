@@ -1,0 +1,80 @@
+--- TinyG-master/firmware/tinyg/controller.c.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/controller.c	2015-01-09 21:09:19.031158894 -0800
+@@ -28,11 +28,9 @@
+  *	 http://www.synthetos.com/wiki/index.php?title=Projects:TinyG-Developer-Info
+  */
+ 
++#include <inttypes.h>				// for parsing
+ #include <ctype.h>				// for parsing
+ #include <string.h>
+-#include <avr/pgmspace.h>		// precursor for xio.h
+-#include <avr/interrupt.h>
+-#include <avr/wdt.h>			// used for software reset
+ 
+ #include "tinyg.h"				// #1 unfortunately, there are some dependencies
+ #include "config.h"				// #2
+@@ -49,9 +47,7 @@
+ #include "report.h"
+ #include "util.h"
+ #include "help.h"
+-#include "xio/xio.h"
+-#include "xmega/xmega_rtc.h"
+-#include "xmega/xmega_init.h"
++#include "stm32f4/stm32f4.h"
+ 
+ // local helpers
+ static void _controller_HSM(void);
+@@ -186,7 +182,7 @@
+ 	strncpy(tg.saved_buf, tg.bufp, SAVED_BUFFER_LEN-1);	// save input buffer for reporting
+ 
+ 	// dispatch the new text line
+-	switch (toupper(*tg.bufp)) {				// first char
++	switch (toupper((int)*tg.bufp)) {				// first char
+ 
+ //		case '!': { cm_request_feedhold(); break; }		// include for diagnostics
+ //		case '@': { cm_request_queue_flush(); break; }
+@@ -232,8 +228,8 @@
+  */
+ static const char prompt_mm[] PROGMEM = "mm";
+ static const char prompt_in[] PROGMEM = "inch";
+-static const char prompt_ok[] PROGMEM = "tinyg [%S] ok> ";
+-static const char prompt_err[] PROGMEM = "tinyg [%S] err: %s: %s ";
++static const char prompt_ok[] PROGMEM = "tinyg [%s] ok> ";
++static const char prompt_err[] PROGMEM = "tinyg [%s] err: %s: %s ";
+ 
+ void tg_text_response(const uint8_t status, const char *buf)
+ {
+@@ -272,9 +268,10 @@
+ 
+ static stat_t _sync_to_tx_buffer()
+ {
+-	if ((xio_get_tx_bufcount_usart(ds[XIO_DEV_USB].x) >= XOFF_TX_LO_WATER_MARK)) {
+-		return (STAT_EAGAIN);
+-	}
++#warning "TODO: fix"
++	//if ((xio_get_tx_bufcount_usart(ds[XIO_DEV_USB].x) >= XOFF_TX_LO_WATER_MARK)) {
++	//	return (STAT_EAGAIN);
++	//}
+ 	return (STAT_OK);
+ }
+ 
+@@ -306,7 +303,8 @@
+ 
+ void tg_reset(void)			// software hard reset using the watchdog timer
+ {
+-	wdt_enable(WDTO_15MS);
++#warning "TODO: reset via watchdog"
++	//wdt_enable(WDTO_15MS);
+ 	while (true);			// loops for about 15ms then resets
+ }
+ 
+@@ -321,7 +319,8 @@
+ {
+ 	if (tg.bootloader_requested == false) { return (STAT_NOOP);}
+ 	cli();
+-	CCPWrite(&RST.CTRL, RST_SWRST_bm);  // fire a software reset
++#warning "TODO: software reset"
++	//CCPWrite(&RST.CTRL, RST_SWRST_bm);  // fire a software reset
+ 	return (STAT_EAGAIN);					// never gets here but keeps the compiler happy
+ }
+ 

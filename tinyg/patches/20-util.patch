@@ -1,0 +1,11 @@
+--- TinyG-master/firmware/tinyg/util.h	2015-01-09 19:37:09.541088467 -0800
++++ TinyG-master/firmware/tinyg/util.h	2015-01-09 19:38:17.013081079 -0800
+@@ -109,7 +109,7 @@
+ #define uSec(a) ((float)(a * MICROSECONDS_PER_MINUTE))
+ 
+ #define RADIAN (57.2957795)
+-//		M_PI is pi as defined in math.h
++#define M_PI (3.14159265358979)
+ //		M_SQRT2 is radical2 as defined in math.h
+ #define M_SQRT3 (1.73205080756888)
+ 

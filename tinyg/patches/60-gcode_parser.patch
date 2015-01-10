@@ -1,0 +1,64 @@
+--- TinyG-master/firmware/tinyg/gcode_parser.c.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/gcode_parser.c	2015-01-09 21:38:42.205390329 -0800
+@@ -19,19 +19,19 @@
+ /* See http://www.synthetos.com/wiki/index.php?title=Projects:TinyG-Developer-Info
+  */
+ 
++#include <inttypes.h>
+ #include <ctype.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <math.h>
+ #include <string.h>					// needed for memcpy, memset
+-#include <avr/pgmspace.h>			// precursor for xio.h
+ 
+ #include "tinyg.h"
+ #include "util.h"
+ #include "config.h"
+ #include "gcode_parser.h"
+ #include "canonical_machine.h"
+-#include "xio/xio.h"				// for char definitions
++#include "stm32f4/stm32f4.h"				// for char definitions
+ 
+ struct gcodeParserSingleton {	 	  // struct to manage globals
+ 	uint8_t modals[MODAL_GROUP_COUNT];// collects modal groups in a block
+@@ -128,8 +128,8 @@
+ 		if (*rd == NUL) { *wr = NUL; }
+ //		else if (*rd == '(') { *wr = NUL; *com = rd+1; }
+ 		else if ((*rd == '(') || (*rd == ';')) { *wr = NUL; *com = rd+1; }
+-		else if ((isalnum((char)*rd)) || (strchr("-.", *rd))) { // all valid characters
+-			*(wr++) = (char_t)toupper((char)*(rd));
++		else if ((isalnum((int)*rd)) || (strchr("-.", *rd))) { // all valid characters
++			*(wr++) = (char_t)toupper((int)*(rd));
+ 		}
+ 	}
+ 	
+@@ -137,7 +137,7 @@
+ 	rd = cmd;
+ 	while (*rd != NUL) {
+ 		if (*rd == '.') break;							// don't strip past a decimal point
+-		if ((!isdigit(*rd)) && (*(rd+1) == '0') && (isdigit(*(rd+2)))) {
++		if ((!isdigit((int)*rd)) && (*(rd+1) == '0') && (isdigit((int)*(rd+2)))) {
+ 			wr = rd+1;
+ 			while (*wr != NUL) { *wr = *(wr+1); wr++;}	// copy forward w/overwrite
+ 			continue;
+@@ -148,8 +148,8 @@
+ 	// process comments and messages
+ 	if (**com != NUL) {
+ 		rd = *com;
+-		while (isspace(*rd)) { rd++; }		// skip any leading spaces before "msg"
+-		if ((tolower(*rd) == 'm') && (tolower(*(rd+1)) == 's') && (tolower(*(rd+2)) == 'g')) {
++		while (isspace((int)*rd)) { rd++; }		// skip any leading spaces before "msg"
++		if ((tolower((int)*rd) == 'm') && (tolower((int)*(rd+1)) == 's') && (tolower((int)*(rd+2)) == 'g')) {
+ 			*msg = rd+3;
+ 		}
+ 		for (; *rd != NUL; rd++) {	
+@@ -170,7 +170,7 @@
+ 	if (**pstr == NUL) { return (STAT_COMPLETE); }	// no more words
+ 
+ 	// get letter part
+-	if(isupper(**pstr) == false) { return (STAT_EXPECTED_COMMAND_LETTER); }
++	if(isupper((int)**pstr) == false) { return (STAT_EXPECTED_COMMAND_LETTER); }
+ 	*letter = **pstr;
+ 	(*pstr)++;
+ 	

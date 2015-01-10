@@ -1,6 +1,23 @@
 
+#ifndef system_h
+#define system_h
 
 void sys_init(void); // master hardware init
+void sys_port_bindings(float hw_version);
+void sys_get_id(char *id);
+
+#define SYS_ID_LEN 12                   // length of system ID string from sys_get_id()
+
+
+#define MIST_COOLANT_BIT    0x01        // coolant on/off - these are the same due to limited ports
+#define FLOOD_COOLANT_BIT   0x01        // coolant on/off
+
+#define INDICATOR_LED       0
+
+#endif
+
+
+
 
 
 #if 0

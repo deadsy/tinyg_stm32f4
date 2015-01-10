@@ -14,10 +14,10 @@ OUTPUT = tinyg_stm32f4
 # tinyg sources
 TINYG_DIR = ./tinyg/TinyG-master/firmware/tinyg
 SRC = $(TINYG_DIR)/canonical_machine.c \
-#      $(TINYG_DIR)/config.c \
-#      $(TINYG_DIR)/controller.c \
-#      $(TINYG_DIR)/cycle_homing.c \
-#      $(TINYG_DIR)/gcode_parser.c \
+      $(TINYG_DIR)/config.c \
+      $(TINYG_DIR)/controller.c \
+      $(TINYG_DIR)/cycle_homing.c \
+      $(TINYG_DIR)/gcode_parser.c \
 #      $(TINYG_DIR)/gpio.c \
 #      $(TINYG_DIR)/help.c \
 #      $(TINYG_DIR)/json_parser.c \
@@ -36,7 +36,7 @@ SRC = $(TINYG_DIR)/canonical_machine.c \
 #      $(TINYG_DIR)/util.c \
 
 STM32F4_DIR = $(TINYG_DIR)/stm32f4
-SRC += $(STM32F4_DIR)/rtc.c
+#SRC += $(STM32F4_DIR)/rtc.c
 
 
 # hal sources

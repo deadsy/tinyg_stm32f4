@@ -1,0 +1,32 @@
+--- TinyG-master/firmware/tinyg/cycle_homing.c.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/cycle_homing.c	2015-01-09 21:30:11.852534688 -0800
+@@ -24,10 +24,11 @@
+  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+  * OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  */
++
++#include <inttypes.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <math.h>
+-#include <avr/pgmspace.h>		// needed for exception strings
+ 
+ #include "tinyg.h"
+ #include "util.h"
+@@ -38,6 +39,7 @@
+ #include "stepper.h"
+ #include "report.h"
+ #include "gpio.h"
++#include "stm32f4/stm32f4.h"
+ 
+ /**** Homing singleton structure ****/
+ 
+@@ -206,7 +208,7 @@
+ 	if (axis == -2) {
+ 		sprintf_P(message, PSTR("*** WARNING *** Homing error: Specified axis(es) cannot be homed"));
+ 	} else {
+-		sprintf_P(message, PSTR("*** WARNING *** Homing error: %S axis settings misconfigured"), (PGM_P)pgm_read_word(&msg_axis[axis]));
++		sprintf_P(message, PSTR("*** WARNING *** Homing error: %s axis settings misconfigured"), (PGM_P)pgm_read_word(&msg_axis[axis]));
+ 	}
+ //	cmd_add_string("msg",message);
+ 	cmd_add_message(message);

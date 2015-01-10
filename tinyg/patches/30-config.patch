@@ -1,0 +1,44 @@
+--- TinyG-master/firmware/tinyg/config.c.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/config.c	2015-01-09 20:33:38.330679115 -0800
+@@ -27,12 +27,12 @@
+ /*
+  *	See config.h for a Config system overview and a bunch of details.
+  */
++#include <inttypes.h>
+ #include <ctype.h>
+ #include <stdlib.h>
+ #include <math.h>
+ #include <string.h>
+ #include <stdio.h>			// precursor for xio.h
+-#include <avr/pgmspace.h>	// precursor for xio.h
+ 
+ #include "tinyg.h"			// config reaches into almost everything
+ #include "util.h"
+@@ -50,8 +50,7 @@
+ #include "help.h"
+ #include "system.h"
+ #include "network.h"
+-#include "xio/xio.h"
+-#include "xmega/xmega_eeprom.h"
++#include "stm32f4/stm32f4.h"
+ 
+ typedef char PROGMEM *prog_char_ptr;	// access to PROGMEM arrays of PROGMEM strings
+ 
+@@ -1338,7 +1337,7 @@
+ 	cfg.usb_baud_rate = baud;
+ 	cfg.usb_baud_flag = true;
+ 	char message[CMD_MESSAGE_LEN]; 
+-	sprintf_P(message, PSTR("*** NOTICE *** Restting baud rate to %S"),(PGM_P)pgm_read_word(&msg_baud[baud]));
++	sprintf_P(message, PSTR("*** NOTICE *** Resetting baud rate to %s"),(PGM_P)pgm_read_word(&msg_baud[baud]));
+ 	cmd_add_message(message);
+ 	return (STAT_OK);
+ }
+@@ -1578,7 +1577,7 @@
+ 	cmd_copy_string(cmd, str);				// make a copy for eventual reporting
+ 	if (*str == '$') str++;					// ignore leading $
+ 	for (ptr_rd = ptr_wr = str; *ptr_rd!=NUL; ptr_rd++, ptr_wr++) {
+-		*ptr_wr = tolower(*ptr_rd);			// convert string to lower case
++		*ptr_wr = tolower((int)*ptr_rd);			// convert string to lower case
+ 		if (*ptr_rd==',') { *ptr_wr = *(++ptr_rd); } // skip over commas
+ 	}
+ 	*ptr_wr = NUL;							// terminate the string
