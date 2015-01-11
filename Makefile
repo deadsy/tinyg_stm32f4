@@ -33,9 +33,7 @@ SRC = $(TINYG_DIR)/canonical_machine.c \
       $(TINYG_DIR)/gpio.c \
       $(TINYG_DIR)/pwm.c \
       $(TINYG_DIR)/stepper.c \
-
-# not ported
-#      $(TINYG_DIR)/system.c \
+      $(TINYG_DIR)/system.c \
 
 # hal sources
 HAL_DIR = ./hal/src
@@ -60,6 +58,10 @@ STM32F4_DIR = ./stm32f4
 SRC += $(STM32F4_DIR)/system_stm32f4xx.c \
        $(STM32F4_DIR)/syscalls.c \
        $(STM32F4_DIR)/delay.c \
+       $(STM32F4_DIR)/xio.c \
+       $(STM32F4_DIR)/eeprom.c \
+       $(STM32F4_DIR)/rtc.c \
+       $(STM32F4_DIR)/platform.c \
 
 # board sources
 #BOARD_DIR = ./board
