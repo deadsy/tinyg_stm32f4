@@ -57,6 +57,8 @@ SRC += $(HAL_DIR)/stm32f4xx_hal.c \
 STM32F4_DIR = ./stm32f4
 SRC += $(STM32F4_DIR)/system_stm32f4xx.c \
        $(STM32F4_DIR)/syscalls.c \
+       $(STM32F4_DIR)/stm32f4xx_it.c \
+       $(STM32F4_DIR)/stm32f4_regs.c \
        $(STM32F4_DIR)/delay.c \
        $(STM32F4_DIR)/xio.c \
        $(STM32F4_DIR)/eeprom.c \
@@ -66,23 +68,21 @@ SRC += $(STM32F4_DIR)/system_stm32f4xx.c \
 # board sources
 #BOARD_DIR = ./board
 #SRC += $(BOARD_DIR)/main.c \
-#       $(BOARD_DIR)/stm32f4xx_it.c \
 #       $(BOARD_DIR)/usbd_conf.c \
 #       $(BOARD_DIR)/usbd_desc.c \
 #       $(BOARD_DIR)/usbd_cdc_interface.c \
 #       $(BOARD_DIR)/gpio.c \
 #       $(BOARD_DIR)/debounce.c \
 #       $(BOARD_DIR)/timers.c \
-#       $(BOARD_DIR)/stm32f4_regs.c \
 
 OBJ = $(patsubst %.c, %.o, $(SRC))
 OBJ += $(STM32F4_DIR)/start.o
 
 # include files
-INC = .
 INC += ./cmsis
 INC += ./hal/inc
 INC += $(STM32F4_DIR)
+INC += $(TINYG_DIR)
 
 #INC += $(USB_DIR)/core
 #INC += $(USB_DIR)/cdc

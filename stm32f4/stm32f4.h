@@ -7,18 +7,7 @@
 
 #include "delay.h"
 #include "xio.h"
-
-//-----------------------------------------------------------------------------
-typedef struct rtClock {
-    volatile uint32_t clock_ticks; // RTC tick counter
-    uint16_t magic_end;
-} rtClock_t;
-
-rtClock_t rtc;
-
-void rtc_init(void);
-
-#define RTC_MILLISECONDS 10 // interrupt on every 10 RTC ticks (~10 ms)
+#include "rtc.h"
 
 //-----------------------------------------------------------------------------
 
