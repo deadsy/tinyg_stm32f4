@@ -1,0 +1,19 @@
+--- TinyG-master/firmware/tinyg/settings.h.original	2015-01-13 21:28:02.248822194 -0800
++++ TinyG-master/firmware/tinyg/settings.h	2015-01-13 21:29:18.284182088 -0800
+@@ -79,7 +79,7 @@
+ 
+ // machine default profiles - choose only one:
+ 
+-#include "settings/settings_default.h"					// Default settings for release
++//#include "settings/settings_default.h"					// Default settings for release
+ //#include "settings/settings_lumenlabMicRoV3.h"		// Lumenlabs micRo v3
+ //#include "settings/settings_mcgyver.h"				// debugging
+ //#include "settings/settings_openpnp.h"				// OpenPnP
+@@ -91,6 +91,7 @@
+ //#include "settings/settings_shapeoko375.h"			// Shapeoko 375mm kit
+ //#include "settings/settings_ultimaker.h"				// Ultimaker 3D printer
+ //#include "settings/settings_zen7x12.h"				// Zen Toolworks 7x12
++#include "settings/settings_cf3d.h"
+ 
+ /*** Handle optional modules that may not be in every machine ***/
+ 

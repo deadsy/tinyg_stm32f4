@@ -1,5 +1,5 @@
 --- TinyG-master/firmware/tinyg/config.c.original	2014-07-12 14:29:33.000000000 -0700
-+++ TinyG-master/firmware/tinyg/config.c	2015-01-09 20:33:38.330679115 -0800
++++ TinyG-master/firmware/tinyg/config.c	2015-01-13 21:08:40.780477398 -0800
 @@ -27,12 +27,12 @@
  /*
   *	See config.h for a Config system overview and a bunch of details.
@@ -24,7 +24,69 @@
  
  typedef char PROGMEM *prog_char_ptr;	// access to PROGMEM arrays of PROGMEM strings
  
-@@ -1338,7 +1337,7 @@
+@@ -540,8 +539,8 @@
+ 	{ "x","xjm",_fip, 0, fmt_Xjm, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_X].jerk_max,		X_JERK_MAX },
+ 	{ "x","xjh",_fip, 0, fmt_Xjh, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_X].jerk_homing,	X_JERK_HOMING },
+ 	{ "x","xjd",_fip, 4, fmt_Xjd, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_X].junction_dev,	X_JUNCTION_DEVIATION },
+-	{ "x","xsn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[0],					X_SWITCH_MODE_MIN },
+-	{ "x","xsx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[1],					X_SWITCH_MODE_MAX },
++	{ "x","xsn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[0],			X_SWITCH_MODE_MIN },
++	{ "x","xsx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[1],			X_SWITCH_MODE_MAX },
+ 	{ "x","xsv",_fip, 0, fmt_Xsv, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_X].search_velocity,X_SEARCH_VELOCITY },
+ 	{ "x","xlv",_fip, 0, fmt_Xlv, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_X].latch_velocity,X_LATCH_VELOCITY },
+ 	{ "x","xlb",_fip, 3, fmt_Xlb, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_X].latch_backoff,	X_LATCH_BACKOFF },
+@@ -554,8 +553,8 @@
+ 	{ "y","yjm",_fip, 0, fmt_Xjm, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Y].jerk_max,		Y_JERK_MAX },
+ 	{ "y","yjh",_fip, 0, fmt_Xjh, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Y].jerk_homing,	Y_JERK_HOMING },
+ 	{ "y","yjd",_fip, 4, fmt_Xjd, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Y].junction_dev,	Y_JUNCTION_DEVIATION },
+-	{ "y","ysn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[2],					Y_SWITCH_MODE_MIN },
+-	{ "y","ysx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[3],					Y_SWITCH_MODE_MAX },
++	{ "y","ysn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[2],			Y_SWITCH_MODE_MIN },
++	{ "y","ysx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[3],			Y_SWITCH_MODE_MAX },
+ 	{ "y","ysv",_fip, 0, fmt_Xsv, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Y].search_velocity,Y_SEARCH_VELOCITY },
+ 	{ "y","ylv",_fip, 0, fmt_Xlv, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Y].latch_velocity,Y_LATCH_VELOCITY },
+ 	{ "y","ylb",_fip, 3, fmt_Xlb, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Y].latch_backoff,	Y_LATCH_BACKOFF },
+@@ -568,8 +567,8 @@
+ 	{ "z","zjm",_fip, 0, fmt_Xjm, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Z].jerk_max,		Z_JERK_MAX },
+ 	{ "z","zjh",_fip, 0, fmt_Xjh, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Z].jerk_homing,	Z_JERK_HOMING },
+ 	{ "z","zjd",_fip, 4, fmt_Xjd, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Z].junction_dev,	Z_JUNCTION_DEVIATION },
+-	{ "z","zsn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[4],					Z_SWITCH_MODE_MIN },
+-	{ "z","zsx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[5],					Z_SWITCH_MODE_MAX },
++	{ "z","zsn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[4],			Z_SWITCH_MODE_MIN },
++	{ "z","zsx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[5],			Z_SWITCH_MODE_MAX },
+ 	{ "z","zsv",_fip, 0, fmt_Xsv, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Z].search_velocity,Z_SEARCH_VELOCITY },
+ 	{ "z","zlv",_fip, 0, fmt_Xlv, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Z].latch_velocity,Z_LATCH_VELOCITY },
+ 	{ "z","zlb",_fip, 3, fmt_Xlb, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_Z].latch_backoff,	Z_LATCH_BACKOFF },
+@@ -583,8 +582,8 @@
+ 	{ "a","ajh",_fip, 0, fmt_Xjh, _pr_ma_lin, _get_dbu, _set_dbu,(float *)&cfg.a[AXIS_A].jerk_homing,	A_JERK_HOMING },
+ 	{ "a","ajd",_fip, 4, fmt_Xjd, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_A].junction_dev,	A_JUNCTION_DEVIATION },
+ 	{ "a","ara",_fip, 3, fmt_Xra, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_A].radius,		A_RADIUS},
+-	{ "a","asn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[6],					A_SWITCH_MODE_MIN },
+-	{ "a","asx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[7],					A_SWITCH_MODE_MAX },
++	{ "a","asn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[6],			A_SWITCH_MODE_MIN },
++	{ "a","asx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[7],			A_SWITCH_MODE_MAX },
+ 	{ "a","asv",_fip, 0, fmt_Xsv, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_A].search_velocity,A_SEARCH_VELOCITY },
+ 	{ "a","alv",_fip, 0, fmt_Xlv, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_A].latch_velocity,A_LATCH_VELOCITY },
+ 	{ "a","alb",_fip, 3, fmt_Xlb, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_A].latch_backoff,	A_LATCH_BACKOFF },
+@@ -597,6 +596,8 @@
+ 	{ "b","bjm",_fip, 0, fmt_Xjm, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_B].jerk_max,		B_JERK_MAX },
+ 	{ "b","bjd",_fip, 0, fmt_Xjd, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_B].junction_dev,	B_JUNCTION_DEVIATION },
+ 	{ "b","bra",_fip, 3, fmt_Xra, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_B].radius,		B_RADIUS },
++	{ "b","bsn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[8],			B_SWITCH_MODE_MIN },
++	{ "b","bsx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[9],			B_SWITCH_MODE_MAX },
+ 
+ 	{ "c","cam",_fip, 0, fmt_Xam, _print_am,  _get_am,  _set_am, (float *)&cfg.a[AXIS_C].axis_mode,		C_AXIS_MODE },
+ 	{ "c","cvm",_fip, 0, fmt_Xvm, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_C].velocity_max,	C_VELOCITY_MAX },
+@@ -605,6 +606,8 @@
+ 	{ "c","cjm",_fip, 0, fmt_Xjm, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_C].jerk_max,		C_JERK_MAX },
+ 	{ "c","cjd",_fip, 0, fmt_Xjd, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_C].junction_dev,	C_JUNCTION_DEVIATION },
+ 	{ "c","cra",_fip, 3, fmt_Xra, _pr_ma_rot, _get_dbl, _set_dbl,(float *)&cfg.a[AXIS_C].radius,		C_RADIUS },
++	{ "c","csn",_fip, 0, fmt_Xsn, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[10],			C_SWITCH_MODE_MIN },
++	{ "c","csx",_fip, 0, fmt_Xsx, _pr_ma_ui8, _get_ui8, _set_sw, (float *)&sw.mode[11],			C_SWITCH_MODE_MAX },
+ 
+ 	// PWM settings
+     { "p1","p1frq",_fip, 0, fmt_p1frq, _print_dbl, _get_dbl, _set_dbl,(float *)&cfg.p.frequency,		P1_PWM_FREQUENCY },
+@@ -1338,7 +1341,7 @@
  	cfg.usb_baud_rate = baud;
  	cfg.usb_baud_flag = true;
  	char message[CMD_MESSAGE_LEN]; 
@@ -33,7 +95,7 @@
  	cmd_add_message(message);
  	return (STAT_OK);
  }
-@@ -1578,7 +1577,7 @@
+@@ -1578,7 +1581,7 @@
  	cmd_copy_string(cmd, str);				// make a copy for eventual reporting
  	if (*str == '$') str++;					// ignore leading $
  	for (ptr_rd = ptr_wr = str; *ptr_rd!=NUL; ptr_rd++, ptr_wr++) {

@@ -1,5 +1,5 @@
---- TinyG-master/firmware/tinyg/main.c.original	2015-01-10 07:21:58.632181633 -0800
-+++ TinyG-master/firmware/tinyg/main.c	2015-01-10 07:21:35.139874907 -0800
+--- TinyG-master/firmware/tinyg/main.c.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/main.c	2015-01-13 20:55:10.651306482 -0800
 @@ -19,14 +19,8 @@
  /* See github.coom/Synthetos/tinyg for code and docs on the wiki 
   */
@@ -25,6 +25,21 @@
  
  static void _unit_tests(void);
  stat_t status_code;				// declared in main.c
+@@ -63,11 +58,11 @@
+ 
+ 	// system and drivers
+ 	sys_init();						// system hardware setup 			- must be first
++	gpio_init();						// switches and parallel IO
+ 	rtc_init();						// real time counter
+ 	xio_init();						// xmega io subsystem
+-	st_init(); 						// stepper subsystem 				- must precede gpio_init()
+-	gpio_init();					// switches and parallel IO
+-	pwm_init();						// pulse width modulation drivers	- must follow gpio_init()
++	st_init(); 						// stepper subsystem
++	pwm_init();						// pulse width modulation drivers
+ 
+ 	// application structures
+ 	tg_init(STD_IN, STD_OUT, STD_ERR);// must be first app init; reqs xio_init()
 @@ -78,10 +73,6 @@
  	sp_init();						// spindle PWM and variables
  

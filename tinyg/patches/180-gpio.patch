@@ -1,5 +1,5 @@
---- TinyG-master/firmware/tinyg/gpio.h.original	2015-01-10 09:41:53.702229276 -0800
-+++ TinyG-master/firmware/tinyg/gpio.h	2015-01-10 09:42:19.930425599 -0800
+--- TinyG-master/firmware/tinyg/gpio.h.original	2014-07-12 14:29:33.000000000 -0700
++++ TinyG-master/firmware/tinyg/gpio.h	2015-01-13 21:03:06.264267570 -0800
 @@ -28,25 +28,6 @@
  #ifndef gpio_h
  #define gpio_h
@@ -26,3 +26,14 @@
  // macros for finding the index into the switch table give the axis number
  #define MIN_SWITCH(axis) (axis*2)
  #define MAX_SWITCH(axis) (axis*2+1)
+@@ -64,6 +45,10 @@
+ 	SW_MAX_Z,
+ 	SW_MIN_A,
+ 	SW_MAX_A,
++	SW_MIN_B,
++	SW_MAX_B,
++	SW_MIN_C,
++	SW_MAX_C,
+ 	NUM_SWITCHES 			// must be last one. Used for array sizing and for loops
+ };
+ #define SW_OFFSET SW_MAX_X	// offset between MIN and MAX switches
