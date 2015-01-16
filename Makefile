@@ -64,6 +64,7 @@ SRC += $(STM32F4_DIR)/system_stm32f4xx.c \
        $(STM32F4_DIR)/eeprom.c \
        $(STM32F4_DIR)/rtc.c \
        $(STM32F4_DIR)/platform.c \
+       $(STM32F4_DIR)/debounce.c \
 
 # board sources
 #BOARD_DIR = ./board
